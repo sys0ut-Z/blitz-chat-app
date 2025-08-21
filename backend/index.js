@@ -14,6 +14,7 @@ import path from "path"
 
 const FRONTEND_URL="http://localhost:5173";
 const app = express();
+const __dirname = path.resolve(); // & absolute path of current directory
 
 app.use(cors({
   origin: FRONTEND_URL,
@@ -26,17 +27,6 @@ app.use(cookieParser()); // it will allow you to parse cookies
 
 app.use('/api/chat-user', userRouter);
 app.use('/api/chat-messages', messageRouter);
-
-const __dirname = path.resolve(); // & absolute path of current directory
-if(process.env.NODE_ENV === "production"){
-  app.use(express.static(path.join(__dirname, "../frontend/dist")));
-  /* 
-    ^ This tells Express to serve static files (like HTML, JS, CSS, images, etc.) from the ../frontend/dist directory.
-  */
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
-  });
-}
 
 const httpServer = http.createServer(app);
 const server = new Server(httpServer, {
@@ -78,6 +68,16 @@ server.on("connection", (socket) => {
     server.emit("getOnlineUsers", Object.keys(userSocketMap)); // & returns 1D array of keys
   })
 });
+
+if(process.env.NODE_ENV === "production"){
+  app.use(express.static(path.join(__dirname, "../frontend/dist")));
+  /* 
+    ^ This tells Express to serve static files (like HTML, JS, CSS, images, etc.) from the ../frontend/dist directory.
+  */
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
+  });
+}
 
 const PORT = process.env.PORT || 5001;
 httpServer.listen(PORT, () => {
