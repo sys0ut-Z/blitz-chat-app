@@ -12,7 +12,7 @@ import {Server} from "socket.io"
 import http from "http"
 import path from "path"
 
-const FRONTEND_URL=process.env.NODE_ENV === "development" ? "http://localhost:5173" : "https://blitz-chat-app-mlz1.onrender.com";
+const FRONTEND_URL="http://localhost:5173";
 const app = express();
 
 app.use(cors({
@@ -90,5 +90,4 @@ connectCloudinary();
 export {
   getReceiverSocketId,
   server,
-  FRONTEND_URL
 }
