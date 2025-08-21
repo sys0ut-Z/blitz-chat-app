@@ -12,11 +12,14 @@ import {Server} from "socket.io"
 import http from "http"
 import path from "path"
 
-// const FRONTEND_URL="http://localhost:5173";
-const FRONTEND_URL="https://blitz-chat-app-gnn2.onrender.com";
+const FRONTEND_URL="http://localhost:5173";
+// const FRONTEND_URL="https://blitz-chat-app-gnn2.onrender.com";
 
 const app = express();
 const __dirname = path.resolve(); // & absolute path of current directory
+
+app.use(express.json()); // allows you to extract JSON data
+app.use(cookieParser()); // it will allow you to parse cookies
 
 app.use(cors({
   origin: FRONTEND_URL,
@@ -24,8 +27,6 @@ app.use(cors({
   // user can parse cookies with this parameter marked true
 }));
 
-app.use(express.json()); // allows you to extract JSON data
-app.use(cookieParser()); // it will allow you to parse cookies
 
 app.use('/api/chat-user', userRouter);
 app.use('/api/chat-messages', messageRouter);

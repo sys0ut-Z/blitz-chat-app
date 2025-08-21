@@ -4,6 +4,8 @@ import {toast} from 'react-toastify'
 import {io} from 'socket.io-client'
 import { BACKEND_URL } from '../constants/otherUrls.js'
 
+const BASE_URL = import.meta.env.MODE === "development" ? BACKEND_URL : "/";
+
 export const useAuthStore = create((set, get) => ({
   // initial states
   authUser: null,
@@ -142,7 +144,7 @@ export const useAuthStore = create((set, get) => ({
     if(!authUser || get().socket?.connected)
       return;
 
-    const socket = io(BACKEND_URL, {
+    const socket = io(BASE_URL, {
       query: {
         userId: authUser._id
       }
