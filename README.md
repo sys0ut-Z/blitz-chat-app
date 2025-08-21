@@ -85,7 +85,7 @@ npm install
 ```
 Create a `.env` file inside **frontend/**:
 ```env
-VITE_BACKEND_URL=http://localhost:5001/api
+BACKEND_URL=http://localhost:5001/api
 ```
 
 Start frontend:
