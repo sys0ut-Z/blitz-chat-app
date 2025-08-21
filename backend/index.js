@@ -12,7 +12,7 @@ import {Server} from "socket.io"
 import http from "http"
 import path from "path"
 
-const FRONTEND_URL=process.env.NODE_ENV === "development" ? "http://localhost:5173" : "";
+const FRONTEND_URL=process.env.NODE_ENV === "development" ? "http://localhost:5173" : "https://blitz-chat-app-mlz1.onrender.com";
 const app = express();
 
 app.use(cors({
@@ -23,7 +23,6 @@ app.use(cors({
 
 app.use(express.json()); // allows you to extract JSON data
 app.use(cookieParser()); // it will allow you to parse cookies
-
 
 app.use('/api/chat-user', userRouter);
 app.use('/api/chat-messages', messageRouter);
