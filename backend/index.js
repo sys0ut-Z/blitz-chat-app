@@ -12,7 +12,9 @@ import {Server} from "socket.io"
 import http from "http"
 import path from "path"
 
-const FRONTEND_URL="http://localhost:5173";
+// const FRONTEND_URL="http://localhost:5173";
+const FRONTEND_URL="https://blitz-chat-app-gnn2.onrender.com";
+
 const app = express();
 const __dirname = path.resolve(); // & absolute path of current directory
 
