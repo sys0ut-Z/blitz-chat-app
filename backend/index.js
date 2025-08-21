@@ -69,15 +69,15 @@ server.on("connection", (socket) => {
   })
 });
 
-if(process.env.NODE_ENV === "production"){
-  app.use(express.static(path.join(__dirname, "../frontend/dist")));
-  /* 
-    ^ This tells Express to serve static files (like HTML, JS, CSS, images, etc.) from the ../frontend/dist directory.
-  */
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
-  });
-}
+
+app.use(express.static(path.join(__dirname, "../frontend/dist")));
+/* 
+  ^ This tells Express to serve static files (like HTML, JS, CSS, images, etc.) from the ../frontend/dist directory.
+*/
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
+});
+
 
 const PORT = process.env.PORT || 5001;
 httpServer.listen(PORT, () => {
